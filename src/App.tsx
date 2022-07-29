@@ -1,26 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [state, setState] = useState({
+    sum : 0,
+    text: ""
+});
+
+//anytime state changes, this function will be ran
+useEffect(() => {
+  
+    console.log(state);
+}, [state])
+
+function updateText(event : any){
+  if(state.sum%2 == 0)
+  {
+    setState({...state, sum: event.target.value, text: "Evenish" })
+  }
+  else
+  {
+    setState({...state, sum: event.target.value, text:"Oddish"});
+
+  }
+
+    
+}
+
+return (
+    <>
+        <input type="number" onChange={updateText} />
+        <h2>{state.text}</h2>
+    </>
+)
+
 }
 
 export default App;
